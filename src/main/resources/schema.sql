@@ -1,13 +1,6 @@
-CREATE TABLE customer (
+CREATE TABLE student (
     id INT PRIMARY KEY AUTO_INCREMENT,
     first_name VARCHAR(300) NOT NULL DEFAULT '',
     last_name VARCHAR(300) NOT NULL DEFAULT '',
     email VARCHAR(300) NOT NULL DEFAULT ''
-);
-
-CREATE TABLE customer_order (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    customer_id INT NOT NULL,
-    item_name VARCHAR(300) NOT NULL DEFAULT '',
-    price INT NOT NULL DEFAULT ''
 );

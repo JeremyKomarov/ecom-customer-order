@@ -1,6 +1,0 @@
-CREATE TABLE student (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    first_name VARCHAR(300) NOT NULL DEFAULT '',
-    last_name VARCHAR(300) NOT NULL DEFAULT '',
-    email VARCHAR(300) NOT NULL DEFAULT ''
-);

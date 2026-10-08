@@ -23,13 +23,12 @@ public class CustomerController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public void deleteCustomerById(@PathVariable("id") Long id) {
+    public void deleteCustomerById(@PathVariable Long id) {
         customerRepository.deleteCustomerById(id);
     }
 
     @GetMapping("/{id}")
-    public Customer getCustomerById(@PathVariable("id") Long id) {
-        System.out.println(id);
+    public Customer getCustomerById(@PathVariable Long id) {
         return customerRepository.getCustomerById(id);
     }
 

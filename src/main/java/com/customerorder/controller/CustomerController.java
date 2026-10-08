@@ -39,4 +39,8 @@ public class CustomerController {
         return customerRepository.getAllCustomers();
     }
 
+    @GetMapping("/ids")
+    public List<Long> getAllCustomerIdsByFirstName(@RequestParam String firstName) {
+        return customerRepository.getAllCustomerIdsByFirstName(firstName);
+    }
 }

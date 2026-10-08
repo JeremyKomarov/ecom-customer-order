@@ -10,4 +10,5 @@ public interface CustomerRepository {
     void deleteCustomerById(Long id);
     Customer getCustomerById(Long id);
     List<Customer> getAllCustomers();
+    List<Long> getAllCustomerIdsByFirstName(String firstName);
 }

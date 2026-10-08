@@ -84,4 +84,19 @@ public class CustomerRepositoryImpl implements CustomerRepository {
             return null;
         }
     }
+
+    @Override
+    public List<Long> getAllCustomerIdsByFirstName(String firstName) {
+        String sql = "SELECT id FROM " + CUSTOMER_TABLE_NAME +
+                     " WHERE first_name = ?";
+        try {
+            return jdbcTemplate.queryForList(
+                    sql,
+                    Long.class,
+                    firstName
+            );
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
+    }
 }

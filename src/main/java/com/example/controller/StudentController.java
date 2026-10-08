@@ -1,24 +1,29 @@
 package com.example.controller;
 
 import com.example.model.Student;
+import com.example.repository.StudentRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/student")
 public class StudentController {
 
+    @Autowired
+    StudentRepository studentRepository;
+
     @PostMapping("/create")
-    public Student createStudent(@RequestBody Student student) {
-        return student;
+    public void createStudent(@RequestBody Student student) {
+        studentRepository.createStudent(student);
     }
 
     @PutMapping("/update")
-    public Student updateStudent(@RequestBody Student student) {
-        return student;
+    public void updateStudent(@RequestBody Student student) {
+        studentRepository.updateStudent(student);
     }
 
     @DeleteMapping("/delete/{id}")
-    public Long deleteStudentById(@PathVariable Long id) {
-        return id;
+    public void deleteStudentById(@PathVariable Long id) {
+        studentRepository.deleteStudentById(id);
     }
 }

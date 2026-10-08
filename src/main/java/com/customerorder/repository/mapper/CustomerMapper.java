@@ -1,6 +1,6 @@
-package com.example.repository.mapper;
+package com.customerorder.repository.mapper;
 
-import com.example.model.Customer;
+import com.customerorder.model.Customer;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;

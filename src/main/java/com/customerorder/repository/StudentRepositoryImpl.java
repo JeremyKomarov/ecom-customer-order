@@ -1,6 +1,6 @@
-package com.example.repository;
+package com.customerorder.repository;
 
-import com.example.model.Student;
+import com.customerorder.model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;

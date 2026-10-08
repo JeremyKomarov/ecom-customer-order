@@ -1,4 +1,4 @@
-package com.example.model;
+package com.customerorder.model;
 
 public class Customer {
     private Long id;

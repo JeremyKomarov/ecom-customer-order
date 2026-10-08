@@ -1,6 +1,6 @@
-package com.example.repository;
+package com.customerorder.repository;
 
-import com.example.model.Student;
+import com.customerorder.model.Student;
 
 public interface StudentRepository {
     void createStudent(Student student);

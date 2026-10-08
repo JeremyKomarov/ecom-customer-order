@@ -1,7 +1,7 @@
-package com.example.repository;
+package com.customerorder.repository;
 
-import com.example.model.Customer;
-import com.example.repository.mapper.CustomerMapper;
+import com.customerorder.model.Customer;
+import com.customerorder.repository.mapper.CustomerMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;

@@ -1,7 +1,7 @@
-package com.example.controller;
+package com.customerorder.controller;
 
-import com.example.model.Customer;
-import com.example.repository.CustomerRepository;
+import com.customerorder.model.Customer;
+import com.customerorder.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

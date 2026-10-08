@@ -7,6 +7,8 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class CustomerRepositoryImpl implements CustomerRepository {
     private static final String CUSTOMER_TABLE_NAME = "customer";
@@ -69,5 +71,17 @@ public class CustomerRepositoryImpl implements CustomerRepository {
         }
     }
 
+    @Override
+    public List<Customer> getAllCustomers() {
+        String sql = "SELECT * FROM " + CUSTOMER_TABLE_NAME;
 
+        try {
+            return jdbcTemplate.query(
+                    sql,
+                    new CustomerMapper()
+            );
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
+    }
 }

@@ -5,6 +5,8 @@ import com.customerorder.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/customer")
 public class CustomerController {
@@ -30,6 +32,11 @@ public class CustomerController {
     @GetMapping("/{id}")
     public Customer getCustomerById(@PathVariable Long id) {
         return customerRepository.getCustomerById(id);
+    }
+
+    @GetMapping("/all")
+    public List<Customer> getAllCustomers() {
+        return customerRepository.getAllCustomers();
     }
 
 }

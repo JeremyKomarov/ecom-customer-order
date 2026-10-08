@@ -23,7 +23,7 @@ public class StudentController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public void deleteStudentById(@PathVariable Long id) {
+    public void deleteStudentById(@PathVariable("id") Long id) {
         studentRepository.deleteStudentById(id);
     }
 }

@@ -12,8 +12,6 @@ public class CustomerMapper implements RowMapper<Customer> {
 
     @Override
     public Customer mapRow(ResultSet rs, int rowNum) throws SQLException {
-        System.out.println(rs.getString("customer_status"));
-
         return new Customer(
                 rs.getLong("id"),
                 rs.getString("first_name"),

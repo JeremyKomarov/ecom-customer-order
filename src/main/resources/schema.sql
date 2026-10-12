@@ -13,3 +13,11 @@ CREATE TABLE customer (
     email VARCHAR(300) NOT NULL DEFAULT '',
     customer_status VARCHAR(50) NOT NULL DEFAULT 'REGULAR'
 );
+
+create TABLE customer_order (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    customer_id INT NOT NULL,
+    item_name VARCHAR(300) NOT NULL DEFAULT '',
+    price DECIMAL(10.2) NOT NULL DEFAULT 0.00,
+    CONSTRAINT fk_customer FOREIGN KEY(customer_id) REFERENCES customer(id)
+);

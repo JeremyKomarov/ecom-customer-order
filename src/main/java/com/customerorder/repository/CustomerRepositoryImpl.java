@@ -19,20 +19,20 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     @Override
     public void createCustomer(Customer customer) {
         String sql = "INSERT INTO " + CUSTOMER_TABLE_NAME +
-                     " (first_name, last_name, email) VALUES (?, ?, ?)";
-
+                     " (first_name, last_name, email, customer_status) VALUES (?, ?, ?, ?)";
         jdbcTemplate.update(
                 sql,
                 customer.getFirstName(),
                 customer.getLastName(),
-                customer.getEmail()
+                customer.getEmail(),
+                customer.getCustomerStatus().name()
         );
     }
 
     @Override
     public void updateCustomer(Customer customer) {
         String sql = "UPDATE " + CUSTOMER_TABLE_NAME +
-                     " SET first_name = ?, last_name = ?, email = ?" +
+                     " SET first_name = ?, last_name = ?, email = ?, customer_status = ?" +
                      " WHERE id = ?";
 
         jdbcTemplate.update(
@@ -40,6 +40,7 @@ public class CustomerRepositoryImpl implements CustomerRepository {
                 customer.getFirstName(),
                 customer.getLastName(),
                 customer.getEmail(),
+                customer.getCustomerStatus().name(),
                 customer.getId()
         );
     }

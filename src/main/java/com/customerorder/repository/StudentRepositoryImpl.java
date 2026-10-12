@@ -20,20 +20,21 @@ public class StudentRepositoryImpl implements StudentRepository {
     @Override
     public void createStudent(Student student) {
         String sql = "INSERT INTO " + STUDENT_TABLE_NAME +
-                     " (first_name, last_name, email) VALUES (?, ?, ?)";
+                     " (first_name, last_name, email, student_payment_method) VALUES (?, ?, ?, ?)";
 
         jdbcTemplate.update(
                 sql,
                 student.getFirstName(),
                 student.getLastName(),
-                student.getEmail()
+                student.getEmail(),
+                student.getStudentPaymentMethod().name()
         );
     }
 
     @Override
     public void updateStudent(Student student) {
         String sql = "UPDATE " + STUDENT_TABLE_NAME +
-                     " SET first_name = ?, last_name = ?, email = ?" +
+                     " SET first_name = ?, last_name = ?, email = ?, student_payment_method = ?" +
                      " WHERE id = ?";
 
         jdbcTemplate.update(
@@ -41,6 +42,7 @@ public class StudentRepositoryImpl implements StudentRepository {
                 student.getFirstName(),
                 student.getLastName(),
                 student.getEmail(),
+                student.getStudentPaymentMethod().name(),
                 student.getId()
         );
     }

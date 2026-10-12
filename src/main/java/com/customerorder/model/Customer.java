@@ -5,12 +5,14 @@ public class Customer {
     private String firstName;
     private String lastName;
     private String email;
+    private CustomerStatus customerStatus;
 
-    public Customer(Long id, String firstName, String lastName, String email) {
+    public Customer(Long id, String firstName, String lastName, String email, CustomerStatus customerStatus) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.customerStatus = customerStatus;
     }
 
     public Long getId() {
@@ -29,6 +31,10 @@ public class Customer {
         return this.email;
     }
 
+    public CustomerStatus getCustomerStatus() {
+        return this.customerStatus;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -43,5 +49,9 @@ public class Customer {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public void setCustomerStatus(CustomerStatus customerStatus) {
+        this.customerStatus = customerStatus;
     }
 }

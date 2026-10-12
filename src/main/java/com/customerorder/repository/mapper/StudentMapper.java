@@ -1,6 +1,7 @@
 package com.customerorder.repository.mapper;
 
 import com.customerorder.model.Student;
+import com.customerorder.model.StudentPaymentMethod;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
@@ -15,7 +16,8 @@ public class StudentMapper implements RowMapper<Student> {
                 rs.getLong("id"),
                 rs.getString("first_name"),
                 rs.getString("last_name"),
-                rs.getString("email")
+                rs.getString("email"),
+                StudentPaymentMethod.valueOf(rs.getString("student_status"))
         );
     }
 }

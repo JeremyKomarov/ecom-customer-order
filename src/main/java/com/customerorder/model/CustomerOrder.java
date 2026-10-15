@@ -1,5 +1,7 @@
 package com.customerorder.model;
 
+import java.util.List;
+
 public class CustomerOrder {
     private Long id;
     private Long customerId;
@@ -43,5 +45,14 @@ public class CustomerOrder {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public CustomerOrderResponse toCustomerOrderResponse(
+            Customer customer,
+            List<CustomerOrder> customerOrderList ) {
+        return new CustomerOrderResponse(
+                customer,
+                customerOrderList
+        );
     }
 }

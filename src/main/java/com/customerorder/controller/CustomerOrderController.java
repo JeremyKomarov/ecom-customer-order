@@ -1,6 +1,8 @@
 package com.customerorder.controller;
 
 import com.customerorder.model.CustomerOrder;
+import com.customerorder.model.CustomerOrderRequest;
+import com.customerorder.model.CustomerOrderResponse;
 import com.customerorder.service.CustomerOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -13,13 +15,13 @@ public class CustomerOrderController {
     CustomerOrderService customerOrderService;
 
     @PostMapping("/create")
-    public void createCustomerOrder(@RequestBody CustomerOrder customerOrder) {
-        customerOrderService.createCustomerOrder(customerOrder);
+    public CustomerOrderResponse createCustomerOrder(@RequestBody CustomerOrderRequest customerOrderRequest) {
+        return customerOrderService.createCustomerOrder(customerOrderRequest);
     }
 
     @PutMapping("/update")
-    public void updateCustomerOrder(@RequestBody CustomerOrder customerOrder) {
-        customerOrderService.updateCustomerOrder(customerOrder);
+    public CustomerOrderResponse updateCustomerOrder(@RequestBody CustomerOrderRequest customerOrderRequest) {
+        return customerOrderService.updateCustomerOrder(customerOrderRequest);
     }
 
     @DeleteMapping("/delete/{id}")

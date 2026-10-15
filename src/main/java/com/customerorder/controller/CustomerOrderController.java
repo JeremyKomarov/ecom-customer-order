@@ -15,17 +15,17 @@ public class CustomerOrderController {
     CustomerOrderService customerOrderService;
 
     @PostMapping("/create")
-    public CustomerOrderResponse createCustomerOrder(@RequestBody CustomerOrderRequest customerOrderRequest) {
+    public CustomerOrderResponse createCustomerOrder(@RequestBody CustomerOrderRequest customerOrderRequest) throws Exception {
         return customerOrderService.createCustomerOrder(customerOrderRequest);
     }
 
     @PutMapping("/update")
-    public CustomerOrderResponse updateCustomerOrder(@RequestBody CustomerOrderRequest customerOrderRequest) {
-        return customerOrderService.updateCustomerOrder(customerOrderRequest);
+    public CustomerOrderResponse updateCustomerOrder(@RequestBody CustomerOrder customerOrder) throws Exception {
+        return customerOrderService.updateCustomerOrder(customerOrder);
     }
 
     @DeleteMapping("/delete/{id}")
-    public void deleteCustomerOrderById(@PathVariable Long id) {
+    public void deleteCustomerOrderById(@PathVariable Long id) throws Exception {
         customerOrderService.deleteCustomerById(id);
     }
 

@@ -6,9 +6,9 @@ import com.customerorder.model.CustomerStatus;
 import java.util.List;
 
 public interface CustomerRepository {
-    Long createCustomer(Customer customer);
-    void updateCustomer(Customer customer);
-    void deleteCustomerById(Long id);
+    Long createCustomer(Customer customer) throws Exception;
+    void updateCustomer(Customer customer) throws Exception;
+    void deleteCustomerById(Long id) throws Exception;
     Customer getCustomerById(Long id);
     List<Customer> getAllCustomers();
     List<Long> getAllCustomerIdsByFirstName(String firstName);

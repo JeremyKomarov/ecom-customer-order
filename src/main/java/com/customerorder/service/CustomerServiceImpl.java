@@ -19,7 +19,7 @@ public class CustomerServiceImpl implements CustomerService{
     ObjectMapper objectMapper;
 
     @Override
-    public Long createCustomer(Customer customer) {
+    public Long createCustomer(Customer customer) throws Exception {
         //Object Mapper reference
         String customerAsString = objectMapper.writeValueAsString(customer);
         System.out.println("Starting create a customer : " + customerAsString);
@@ -33,8 +33,7 @@ public class CustomerServiceImpl implements CustomerService{
             if (!(vipCustomers.size() >= 10)) {
                 return customerRepository.createCustomer(customer);
             } else {
-                System.out.println("Could not create new customer with status VIP - Out of limit");
-                return null;
+                throw new Exception("Could not create new customer with status VIP - Out of limit");
             }
         } else {
             return customerRepository.createCustomer(customer);
@@ -42,14 +41,14 @@ public class CustomerServiceImpl implements CustomerService{
     }
 
     @Override
-    public void updateCustomer(Customer customer) {
+    public void updateCustomer(Customer customer) throws Exception {
         if (customer.getCustomerStatus() == CustomerStatus.VIP) {
             List<Customer> vipCustomers = customerRepository.getAllCustomersByStatus(CustomerStatus.VIP);
 
             if (!(vipCustomers.size() >= 10)) {
                 customerRepository.updateCustomer(customer);
             } else {
-                System.out.println("Could not update new customer with status VIP - Out of limit");
+                throw new Exception("Could not update new customer with status VIP - Out of limit");
             }
         } else {
             customerRepository.updateCustomer(customer);
@@ -57,7 +56,7 @@ public class CustomerServiceImpl implements CustomerService{
     }
 
     @Override
-    public void deleteCustomerById(Long id) {
+    public void deleteCustomerById(Long id) throws Exception {
         customerRepository.deleteCustomerById(id);
     }
 

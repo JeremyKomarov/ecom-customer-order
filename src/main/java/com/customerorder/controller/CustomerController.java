@@ -16,17 +16,17 @@ public class CustomerController {
     private CustomerService customerService;
 
     @PostMapping("/create")
-    public void createCustomer(@RequestBody Customer customer) {
+    public void createCustomer(@RequestBody Customer customer) throws Exception {
         customerService.createCustomer(customer);
     }
 
     @PutMapping("/update")
-    public void updateCustomer(@RequestBody Customer customer) {
+    public void updateCustomer(@RequestBody Customer customer) throws Exception {
         customerService.updateCustomer(customer);
     }
 
     @DeleteMapping("/delete/{id}")
-    public void deleteCustomerById(@PathVariable Long id) {
+    public void deleteCustomerById(@PathVariable Long id) throws Exception {
         customerService.deleteCustomerById(id);
     }
 

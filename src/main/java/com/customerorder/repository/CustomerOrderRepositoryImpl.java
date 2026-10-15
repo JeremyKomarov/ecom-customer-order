@@ -7,6 +7,8 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class CustomerOrderRepositoryImpl implements CustomerOrderRepository{
     private static final String CUSTOMER_ORDER_TABLE_NAME = "customer_order";
@@ -15,42 +17,54 @@ public class CustomerOrderRepositoryImpl implements CustomerOrderRepository{
     JdbcTemplate jdbcTemplate;
 
     @Override
-    public void createCustomerOrder(CustomerOrder customerOrder) {
+    public void createCustomerOrder(CustomerOrder customerOrder) throws Exception {
         String sql = "INSERT INTO " + CUSTOMER_ORDER_TABLE_NAME +
                      " (customer_id, item_name, price) VALUES (?, ?, ?)";
 
-        jdbcTemplate.update(
-                sql,
-                customerOrder.getCustomerId(),
-                customerOrder.getItemName(),
-                customerOrder.getPrice()
-        );
+        try {
+            jdbcTemplate.update(
+                    sql,
+                    customerOrder.getCustomerId(),
+                    customerOrder.getItemName(),
+                    customerOrder.getPrice()
+            );
+        } catch (Exception e) {
+            throw new Exception("Something went wrong");
+        }
     }
 
     @Override
-    public void updateCustomerOrder(CustomerOrder customerOrder) {
+    public void updateCustomerOrder(CustomerOrder customerOrder) throws Exception {
         String sql = "UPDATE " + CUSTOMER_ORDER_TABLE_NAME +
                 " SET customer_id = ?, item_name = ?, price = ?" +
                 " WHERE id = ?";
 
-        jdbcTemplate.update(
-                sql,
-                customerOrder.getCustomerId(),
-                customerOrder.getItemName(),
-                customerOrder.getPrice(),
-                customerOrder.getId()
-        );
+        try {
+            jdbcTemplate.update(
+                    sql,
+                    customerOrder.getCustomerId(),
+                    customerOrder.getItemName(),
+                    customerOrder.getPrice(),
+                    customerOrder.getId()
+            );
+        } catch (Exception e) {
+            throw new Exception("Something went wrong");
+        }
     }
 
     @Override
-    public void deleteCustomerById(Long id) {
+    public void deleteCustomerById(Long id) throws Exception {
         String sql = "DELETE FROM " + CUSTOMER_ORDER_TABLE_NAME +
                 " WHERE id = ?";
 
-        jdbcTemplate.update(
-                sql,
-                id
-        );
+        try {
+            jdbcTemplate.update(
+                    sql,
+                    id
+            );
+        } catch (Exception e) {
+            throw new Exception("Something went wrong");
+        }
     }
 
     @Override
@@ -69,4 +83,22 @@ public class CustomerOrderRepositoryImpl implements CustomerOrderRepository{
             return null;
         }
     }
+
+    @Override
+    public List<CustomerOrder> getAllCustomerOrdersById(Long id) throws Exception {
+        String sql = "SELECT * FROM " + CUSTOMER_ORDER_TABLE_NAME +
+                " WHERE customer_id = ?";
+
+        try {
+            return jdbcTemplate.query(
+                    sql,
+                    new CustomerOrderMapper(),
+                    id
+            );
+        } catch (Exception e) {
+            throw new Exception("Something went wrong");
+        }
+    }
+
+
 }

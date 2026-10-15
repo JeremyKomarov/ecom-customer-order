@@ -18,45 +18,57 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     private JdbcTemplate jdbcTemplate;
 
     @Override
-    public Long createCustomer(Customer customer) {
+    public Long createCustomer(Customer customer) throws Exception {
         String sql = "INSERT INTO " + CUSTOMER_TABLE_NAME +
                      " (first_name, last_name, email, customer_status) VALUES (?, ?, ?, ?)";
-        jdbcTemplate.update(
-                sql,
-                customer.getFirstName(),
-                customer.getLastName(),
-                customer.getEmail(),
-                customer.getCustomerStatus().name()
-        );
 
-        return jdbcTemplate.queryForObject("SELECT LAST_INSERT_ID()", Long.class);
+        try {
+            jdbcTemplate.update(
+                    sql,
+                    customer.getFirstName(),
+                    customer.getLastName(),
+                    customer.getEmail(),
+                    customer.getCustomerStatus().name()
+            );
+
+            return jdbcTemplate.queryForObject("SELECT LAST_INSERT_ID()", Long.class);
+        } catch (Exception e) {
+            throw new Exception("Something went wrong");
+        }
     }
 
     @Override
-    public void updateCustomer(Customer customer) {
+    public void updateCustomer(Customer customer) throws Exception {
         String sql = "UPDATE " + CUSTOMER_TABLE_NAME +
                      " SET first_name = ?, last_name = ?, email = ?, customer_status = ?" +
                      " WHERE id = ?";
-
-        jdbcTemplate.update(
-                sql,
-                customer.getFirstName(),
-                customer.getLastName(),
-                customer.getEmail(),
-                customer.getCustomerStatus().name(),
-                customer.getId()
-        );
+        try {
+            jdbcTemplate.update(
+                    sql,
+                    customer.getFirstName(),
+                    customer.getLastName(),
+                    customer.getEmail(),
+                    customer.getCustomerStatus().name(),
+                    customer.getId()
+            );
+        } catch (Exception e) {
+            throw new Exception("Something went wrong");
+        }
     }
 
     @Override
-    public void deleteCustomerById(Long id) {
+    public void deleteCustomerById(Long id) throws Exception {
         String sql = "DELETE FROM " + CUSTOMER_TABLE_NAME +
                      " WHERE id = ?";
 
-        jdbcTemplate.update(
-                sql,
-                id
-        );
+        try {
+            jdbcTemplate.update(
+                    sql,
+                    id
+            );
+        } catch (Exception e) {
+            throw new Exception("Something went wrong");
+        }
     }
 
     @Override

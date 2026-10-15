@@ -20,8 +20,6 @@ public class CustomerServiceImpl implements CustomerService{
 
     @Override
     public void createCustomer(Customer customer) {
-        List<Customer> vipCustomers = customerRepository.getAllCustomersByStatus(CustomerStatus.VIP);
-
         //Object Mapper reference
         String customerAsString = objectMapper.writeValueAsString(customer);
         System.out.println("Starting create a customer : " + customerAsString);
@@ -29,10 +27,16 @@ public class CustomerServiceImpl implements CustomerService{
         System.out.println(customerFromString.getFirstName());
 
 
-        if (!(vipCustomers.size() >= 10)) {
-            customerRepository.createCustomer(customer);
+        if (customer.getCustomerStatus() == CustomerStatus.VIP) {
+            List<Customer> vipCustomers = customerRepository.getAllCustomersByStatus(CustomerStatus.VIP);
+
+            if (!(vipCustomers.size() >= 10)) {
+                customerRepository.createCustomer(customer);
+            } else {
+                System.out.println("Could not create new customer with status VIP - Out of limit");
+            }
         } else {
-            System.out.println("Could not create new customer with status VIP - Out of limit");
+            customerRepository.createCustomer(customer);
         }
     }
 

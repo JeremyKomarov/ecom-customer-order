@@ -28,7 +28,7 @@ public class CustomerOrderController {
     }
 
     @GetMapping("/{id}")
-    public void getCustomerOrderById(@PathVariable Long id) {
-        customerOrderService.getCustomerOrderById(id);
+    public CustomerOrder getCustomerOrderById(@PathVariable Long id) {
+        return customerOrderService.getCustomerOrderById(id);
     }
 }

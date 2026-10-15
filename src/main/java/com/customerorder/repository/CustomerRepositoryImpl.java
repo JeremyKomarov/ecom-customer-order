@@ -105,7 +105,7 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     @Override
     public List<Customer> getAllCustomersByStatus(CustomerStatus customerStatus) {
         String sql = "SELECT * FROM " + CUSTOMER_TABLE_NAME +
-                " WHERE customer_status = ?";
+                     " WHERE customer_status = ?";
 
         try {
             return jdbcTemplate.query(
@@ -117,6 +117,5 @@ public class CustomerRepositoryImpl implements CustomerRepository {
             return null;
         }
     }
-
 
 }

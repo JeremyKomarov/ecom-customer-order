@@ -5,7 +5,7 @@ import com.customerorder.model.Customer;
 import java.util.List;
 
 public interface CustomerService {
-    void createCustomer(Customer customer);
+    Long createCustomer(Customer customer);
     void updateCustomer(Customer customer);
     void deleteCustomerById(Long id);
     Customer getCustomerById(Long id);

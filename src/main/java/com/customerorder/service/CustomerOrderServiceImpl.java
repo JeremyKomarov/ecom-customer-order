@@ -24,9 +24,15 @@ public class CustomerOrderServiceImpl implements CustomerOrderService{
 
         if (selectedCustomer != null) {
             if (selectedCustomer.getId() != null) {
+                Customer existingCustomer = customerService.getCustomerById(selectedCustomer.getId());
 
+                if(existingCustomer != null) {
+                    customerOrderRepository.createCustomerOrder(customerOrderRequest.toCustomerOrder());
+                } else {
+                    throw new Exception("Cant create customer order with non exisitng id " + selectedCustomer.getId());
+                }
             } else {
-
+                Long createdCustomerId = customerService.createCustomer(selectedCustomer);
             }
 
         } else {

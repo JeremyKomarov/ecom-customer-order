@@ -18,7 +18,7 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     private JdbcTemplate jdbcTemplate;
 
     @Override
-    public void createCustomer(Customer customer) {
+    public Long createCustomer(Customer customer) {
         String sql = "INSERT INTO " + CUSTOMER_TABLE_NAME +
                      " (first_name, last_name, email, customer_status) VALUES (?, ?, ?, ?)";
         jdbcTemplate.update(
@@ -28,6 +28,8 @@ public class CustomerRepositoryImpl implements CustomerRepository {
                 customer.getEmail(),
                 customer.getCustomerStatus().name()
         );
+
+        return jdbcTemplate.queryForObject("SELECT LAST_INSERT_ID()", Long.class);
     }
 
     @Override

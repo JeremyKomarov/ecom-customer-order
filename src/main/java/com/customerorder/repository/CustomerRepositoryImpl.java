@@ -2,11 +2,13 @@ package com.customerorder.repository;
 
 import com.customerorder.model.Customer;
 import com.customerorder.model.CustomerStatus;
+import com.customerorder.redis.CacheRepository;
 import com.customerorder.repository.mapper.CustomerMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+import tools.jackson.databind.ObjectMapper;
 
 import java.util.List;
 
@@ -16,6 +18,12 @@ public class CustomerRepositoryImpl implements CustomerRepository {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
+
+    @Autowired
+    CacheRepository cacheRepository;
+
+    @Autowired
+    ObjectMapper objectMapper;
 
     @Override
     public Long createCustomer(Customer customer) throws Exception {
@@ -51,6 +59,9 @@ public class CustomerRepositoryImpl implements CustomerRepository {
                     customer.getCustomerStatus().name(),
                     customer.getId()
             );
+
+            String customerAsString = objectMapper.writeValueAsString(customer);
+            cacheRepository.updateCacheEntity(customer.getId().toString(), customerAsString);
         } catch (Exception e) {
             throw new Exception("Something went wrong");
         }
@@ -66,24 +77,37 @@ public class CustomerRepositoryImpl implements CustomerRepository {
                     sql,
                     id
             );
+
+            cacheRepository.deleteCacheEntity(id.toString());
         } catch (Exception e) {
-            throw new Exception("Something went wrong");
+            throw new Exception("Something went wrong", e);
         }
     }
 
     @Override
     public Customer getCustomerById(Long id) {
-        String sql = "SELECT * FROM " + CUSTOMER_TABLE_NAME +
-                     " WHERE id = ?";
+        String customerFromCacheAsString = cacheRepository.getCacheEntity(id.toString());
 
-        try {
-            return jdbcTemplate.queryForObject(
-                    sql,
-                    new CustomerMapper(),
-                    id
-            );
-        } catch (EmptyResultDataAccessException e) {
-            return null;
+        if (customerFromCacheAsString == null) {
+            String sql = "SELECT * FROM " + CUSTOMER_TABLE_NAME +
+                         " WHERE id = ?";
+
+            try {
+                Customer customerFromDB = jdbcTemplate.queryForObject(
+                        sql,
+                        new CustomerMapper(),
+                        id
+                );
+
+                String customerAsString = objectMapper.writeValueAsString(customerFromDB);
+                cacheRepository.createCacheEntity(customerFromDB.getId().toString(), customerAsString);
+                return customerFromDB;
+            } catch (EmptyResultDataAccessException e) {
+                return null;
+            }
+        } else {
+            Customer customerFromCachesAsObject = objectMapper.readValue(customerFromCacheAsString, Customer.class);
+            return customerFromCachesAsObject;
         }
     }
 

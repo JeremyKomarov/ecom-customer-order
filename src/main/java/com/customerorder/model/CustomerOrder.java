@@ -49,7 +49,8 @@ public class CustomerOrder {
 
     public CustomerOrderResponse toCustomerOrderResponse(
             Customer customer,
-            List<CustomerOrder> customerOrderList ) {
+            List<CustomerOrder> customerOrderList
+    ) {
         return new CustomerOrderResponse(
                 customer,
                 customerOrderList

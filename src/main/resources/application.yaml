@@ -1,4 +1,6 @@
 spring:
+  config:
+    import: optional:file:.env[.properties]
   datasource:
     url: jdbc:h2:mem:testdb;MODE=MySQL
     driver-class-name: org.h2.Driver
@@ -12,6 +14,11 @@ spring:
 externalApi:
   tvMaze:
     url: https://api.tvmaze.com
+  lastFm:
+    url: https://ws.audioscrobbler.com/2.0
+    apiKey: ${LAST_FM_API_KEY}
+  deliveryOrderService:
+    url: localhost:8082
 
 redis:
   host: localhost

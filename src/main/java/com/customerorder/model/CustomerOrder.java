@@ -7,12 +7,14 @@ public class CustomerOrder {
     private Long customerId;
     private String itemName;
     private Double price;
+    private Long deliveryId;
 
-    public CustomerOrder(Long id, Long customerId, String itemName, Double price) {
+    public CustomerOrder(Long id, Long customerId, String itemName, Double price, Long deliveryId) {
         this.id = id;
         this.customerId = customerId;
         this.itemName = itemName;
         this.price = price;
+        this.deliveryId = deliveryId;
     }
 
     public Long getId() {
@@ -31,6 +33,10 @@ public class CustomerOrder {
         return this.price;
     }
 
+    public Long getDeliveryId() {
+        return this.deliveryId;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -45,6 +51,10 @@ public class CustomerOrder {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public void setDeliveryId(Long deliveryId) {
+        this.deliveryId = deliveryId;
     }
 
     public CustomerOrderResponse toCustomerOrderResponse(

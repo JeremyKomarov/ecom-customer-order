@@ -1,8 +1,6 @@
 package com.customerorder.repository;
 
 import com.customerorder.model.CustomerOrder;
-import com.customerorder.model.CustomerOrderRequest;
-import com.customerorder.model.CustomerOrderResponse;
 
 import java.util.List;
 

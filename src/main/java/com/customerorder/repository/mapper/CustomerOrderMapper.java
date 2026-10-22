@@ -14,7 +14,8 @@ public class CustomerOrderMapper implements RowMapper<CustomerOrder> {
                 rs.getLong("id"),
                 rs.getLong("customer_id"),
                 rs.getString("item_name"),
-                rs.getDouble("price")
+                rs.getDouble("price"),
+                rs.getLong("delivery_id")
         );
     }
 }

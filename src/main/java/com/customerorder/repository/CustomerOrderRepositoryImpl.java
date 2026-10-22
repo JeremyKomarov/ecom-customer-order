@@ -19,14 +19,15 @@ public class CustomerOrderRepositoryImpl implements CustomerOrderRepository{
     @Override
     public void createCustomerOrder(CustomerOrder customerOrder) throws Exception {
         String sql = "INSERT INTO " + CUSTOMER_ORDER_TABLE_NAME +
-                     " (customer_id, item_name, price) VALUES (?, ?, ?)";
+                     " (customer_id, item_name, price, delivery_id) VALUES (?, ?, ?, ?)";
 
         try {
             jdbcTemplate.update(
                     sql,
                     customerOrder.getCustomerId(),
                     customerOrder.getItemName(),
-                    customerOrder.getPrice()
+                    customerOrder.getPrice(),
+                    customerOrder.getDeliveryId()
             );
         } catch (Exception e) {
             throw new Exception("Something went wrong");
@@ -36,7 +37,7 @@ public class CustomerOrderRepositoryImpl implements CustomerOrderRepository{
     @Override
     public void updateCustomerOrder(CustomerOrder customerOrder) throws Exception {
         String sql = "UPDATE " + CUSTOMER_ORDER_TABLE_NAME +
-                " SET customer_id = ?, item_name = ?, price = ?" +
+                " SET customer_id = ?, item_name = ?, price = ? delivery_id = ?" +
                 " WHERE id = ?";
 
         try {
@@ -45,6 +46,7 @@ public class CustomerOrderRepositoryImpl implements CustomerOrderRepository{
                     customerOrder.getCustomerId(),
                     customerOrder.getItemName(),
                     customerOrder.getPrice(),
+                    customerOrder.getDeliveryId(),
                     customerOrder.getId()
             );
         } catch (Exception e) {

@@ -31,7 +31,8 @@ public class CustomerOrderRequest {
                 this.getCustomerOrder().getId(),
                 this.getCustomer().getId(),
                 this.getCustomerOrder().getItemName(),
-                this.getCustomerOrder().getPrice()
+                this.getCustomerOrder().getPrice(),
+                this.getCustomerOrder().getDeliveryId()
         );
     }
 }

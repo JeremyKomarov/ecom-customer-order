@@ -11,5 +11,6 @@ create TABLE customer_order (
     customer_id INT NOT NULL,
     item_name VARCHAR(300) NOT NULL DEFAULT '',
     price DECIMAL(10.2) NOT NULL DEFAULT 0.00,
+    delivery_id Long,
     CONSTRAINT fk_customer FOREIGN KEY(customer_id) REFERENCES customer(id)
 );
